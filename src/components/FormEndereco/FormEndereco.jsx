@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import style from "./FormEndereco.module.css";
-import Submit from "../Submit";
+import Submit from "../Submit/";
 import Input from '../Input';
 import Select from "../Select";
 import { consultarEndereco } from '../../contexts/enderecoSlice';
@@ -46,7 +46,7 @@ function FormEndereco() {
             await dispatch(consultarEndereco({
                 estado: data.estado,
                 cidade: data.cidade,
-                bairro: data.bairro
+                rua: data.rua
             })).unwrap();
         } catch (err) {
             console.error('Falha ao consultar endereço:', err);
@@ -73,8 +73,8 @@ function FormEndereco() {
                 register={register}
             />
             <Input
-                label='Bairro'
-                name='bairro'
+                label='Rua'
+                name='rua'
                 errors={errors}
                 validationRules={{ required: 'Campo Obrigatório', minLength: { value: 3, message: 'Bairro deve ter pelo menos 3 caracteres' } }}
                 register={register}

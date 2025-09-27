@@ -1,10 +1,10 @@
 import './App.css';
 import { Provider } from 'react-redux';
 import React, { Suspense } from 'react';
-import store from './contexts/store';
-import Header from './components/Header/Header.js';
+import store from './contexts/store.js';
+import Header from './components/Header/Header.jsx';
 
-const FormEndereco = React.lazy(() => import('./components/FormEndereco/FormEndereco.js'));
+const FormEndereco = React.lazy(() => import('./components/FormEndereco/FormEndereco.jsx'));
 
 function App() {
   return (

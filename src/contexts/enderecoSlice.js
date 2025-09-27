@@ -3,11 +3,11 @@ import buscaCep from '../cepService';
 
 export const consultarEndereco = createAsyncThunk(
     'endereco/consultarEndereco',
-    async ({ estado, cidade, bairro }) => {
+    async ({ estado, cidade, rua }) => {
         try {
-            const ceps = await buscaCep(estado, cidade, bairro);
+            const ceps = await buscaCep(estado, cidade, rua);
             return {
-                dados: { estado, cidade, bairro },
+                dados: { estado, cidade, rua },
                 ceps
             };
         } catch (error) {
@@ -21,7 +21,7 @@ const enderecoSlice = createSlice({
     initialState: {
         estado: '',
         cidade: '',
-        bairro: '',
+        rua: '',
         ceps: [],
         status: '',
         error: null
@@ -37,7 +37,7 @@ const enderecoSlice = createSlice({
                 const { dados, ceps } = action.payload;
                 state.estado = dados.estado;
                 state.cidade = dados.cidade;
-                state.bairro = dados.bairro;
+                state.rua = dados.rua;
                 state.ceps = ceps;
                 state.status = 'succeeded';
             })

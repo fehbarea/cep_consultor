@@ -17,6 +17,7 @@ Uma aplicação React moderna para consulta de CEPs brasileiros através de ende
 - **React Hook Form**: Gerenciamento e validação de formulários
 - **Axios**: Cliente HTTP para requisições à API
 - **CSS Modules**: Estilização modular dos componentes
+- **Lazy**: Carregamentos dos componentes
 
 ## 📦 Estrutura do Projeto
 
