@@ -1,70 +1,81 @@
-# Getting Started with Create React App
+# Consultor de CEP
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Uma aplicação React moderna para consulta de CEPs brasileiros através de endereço. O projeto utiliza a API do ViaCEP para realizar buscas reversas de CEP a partir do estado, cidade e bairro informados.
 
-## Available Scripts
+## 🚀 Funcionalidades
 
-In the project directory, you can run:
+- Consulta reversa de CEP (busca por endereço)
+- Seleção de estado através de dropdown
+- Validação de formulário
+- Exibição de múltiplos resultados
+- Feedback em tempo real do status da busca
 
-### `npm start`
+## 🛠️ Tecnologias Utilizadas
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **React**: Framework JavaScript para construção da interface
+- **Redux Toolkit**: Gerenciamento de estado da aplicação
+- **React Hook Form**: Gerenciamento e validação de formulários
+- **Axios**: Cliente HTTP para requisições à API
+- **CSS Modules**: Estilização modular dos componentes
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📦 Estrutura do Projeto
 
-### `npm test`
+```
+src/
+├── components/
+│   ├── FormEndereco/
+│   ├── Input/
+│   ├── Select/
+│   └── Submit/
+├── contexts/
+│   ├── enderecoSlice.js
+│   └── store.js
+└── services/
+    └── cepService.js
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 💻 Como Usar
 
-### `npm run build`
+1. Clone o repositório:
+```bash
+git clone https://github.com/fehbarea/cep_consultor.git
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Instale as dependências:
+```bash
+npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. Execute o projeto:
+```bash
+npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🔍 Funcionalidades Detalhadas
 
-### `npm run eject`
+### Formulário de Busca
+- Campo de seleção de estado com todos os estados brasileiros
+- Campo de entrada para cidade com validação mínima de 3 caracteres
+- Campo de entrada para bairro com validação mínima de 3 caracteres
+- Botão de submit com feedback visual durante a busca
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Gerenciamento de Estado
+- Utiliza Redux Toolkit para gerenciamento de estado global
+- Implementa actions assíncronas para chamadas à API
+- Mantém estado de loading e erro para melhor experiência do usuário
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Validação de Formulário
+- Validação em tempo real dos campos
+- Mensagens de erro personalizadas
+- Prevenção de submissão com dados inválidos
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Exibição de Resultados
+- Lista todos os CEPs encontrados para o endereço
+- Exibe informações detalhadas de cada resultado
+- Tratamento para casos de nenhum resultado encontrado
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+## 👤 Autor
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [@fehbarea](https://github.com/fehbarea)
+- [@Dani-Jacob](https://github.com/Dani-Jacob)
