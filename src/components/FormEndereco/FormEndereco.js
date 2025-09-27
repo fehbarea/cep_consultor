@@ -1,11 +1,15 @@
 import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
 import style from "./FormEndereco.module.css";
 import Submit from "../Submit";
 import Input from '../Input';
 import Select from "../Select";
+import { consultarEndereco } from '../../contexts/enderecoSlice';
 
 function FormEndereco() {
+    const dispatch = useDispatch();
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const { ceps, status, error } = useSelector(state => state.endereco);
 
     const estadosBrasileiros = [
   { label: 'Acre', value: 'AC' },
@@ -37,12 +41,21 @@ function FormEndereco() {
   { label: 'Tocantins', value: 'TO' }
 ];
 
-    function onSubmit() {
-
+    async function onSubmit(data) {
+        try {
+            await dispatch(consultarEndereco({
+                estado: data.estado,
+                cidade: data.cidade,
+                bairro: data.bairro
+            })).unwrap();
+        } catch (err) {
+            console.error('Falha ao consultar endereço:', err);
+        }
     }
 
     return (
         <section className={style.page}>
+            <h1>Buscador de CEP</h1>
         <form id='FormCadastroOficina' className={style.form} onSubmit={handleSubmit(onSubmit)}>
             <Select
                 label='Estado'
@@ -51,29 +64,51 @@ function FormEndereco() {
                 errors={errors}
                 options={estadosBrasileiros}
                 validationRules={{ required: 'Campo Obrigatório' }}
-
             />
              <Input
                 label='Cidade'
-                name='CIdade'
+                name='cidade'
                 errors={errors}
                 validationRules={{ required: 'Campo Obrigatório', minLength: { value: 3, message: 'Cidade deve ter pelo menos 3 caracteres' } }}
                 register={register}
-
             />
             <Input
                 label='Bairro'
-                name='Bairro'
+                name='bairro'
                 errors={errors}
                 validationRules={{ required: 'Campo Obrigatório', minLength: { value: 3, message: 'Bairro deve ter pelo menos 3 caracteres' } }}
                 register={register}
-
             />
             <Submit
-                label='Buscar Cep'
-                type="button"
+                label={status === 'loading' ? 'Buscando...' : 'Buscar Cep'}
+                type="submit"
+                disabled={status === 'loading'}
             />
         </form>
+
+        {/* Exibição dos resultados */}
+        {status === 'loading' && <p>Carregando...</p>}
+        {status === 'failed' && <p>Erro: {error}</p>}
+        {status === 'succeeded' && (
+            <div className={style.results}>
+                <h3>{ceps.length} CEPs Encontrados:</h3>
+                {ceps.length === 0 ? (
+                    <p>Nenhum CEP encontrado para o endereço informado.</p>
+                ) : (
+                    <ul>
+                        {ceps.map((cep, index) => (
+                            <li key={index}>
+                                <p>CEP: {cep.cep}</p>
+                                <p>Logradouro: {cep.logradouro}</p>
+                                <p>Bairro: {cep.bairro}</p>
+                                <p>Cidade: {cep.localidade}</p>
+                                <p>Estado: {cep.estado}</p>
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
+        )}
         </section>
 
     );

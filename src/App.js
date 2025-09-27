@@ -1,12 +1,15 @@
-import logo from './logo.svg';
 import './App.css';
+import { Provider } from 'react-redux';
 import FormEndereco from './components/FormEndereco/FormEndereco.js';
+import store from './contexts/store';
 
 function App() {
   return (
-    <div className="App">
-      <FormEndereco/>
-    </div>
+    <Provider store={store}>
+      <div className="App">
+        <FormEndereco/>
+      </div>
+    </Provider>
   );
 }
 
